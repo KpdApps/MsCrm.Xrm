@@ -1,1 +1,1 @@
-# MsCrm.Xrm
+# KpdApps.MsCrm.Xrm.Common

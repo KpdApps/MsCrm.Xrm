@@ -4,5 +4,5 @@ Xrm it's strategic approach to build a unified system that connects all aspects 
 
 | Build | Status |
 | ------ | ------ |
-| Master | [![Build status](https://ci.appveyor.com/api/projects/status/wliv023f7dqfarsg?svg=true)](https://ci.appveyor.com/project/KpdAppsProject/mscrm-xrm) |
-| Lastest| [![Build status](https://ci.appveyor.com/api/projects/status/wliv023f7dqfarsg/branch/develop?svg=true)](https://ci.appveyor.com/project/KpdAppsProject/mscrm-xrm/branch/develop) |
+| Latest | [![Build status](https://ci.appveyor.com/api/projects/status/wliv023f7dqfarsg?svg=true)](https://ci.appveyor.com/project/KpdAppsProject/mscrm-xrm) |
+| Master | [![Build status](https://ci.appveyor.com/api/projects/status/wliv023f7dqfarsg/branch/master?svg=true)](https://ci.appveyor.com/project/KpdAppsProject/mscrm-xrm/branch/master) |

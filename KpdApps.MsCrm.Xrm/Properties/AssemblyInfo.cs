@@ -5,13 +5,13 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("KpdApps.MsCrm.Xrm.Common")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("KpdApps MsCrm Xrm")]
+[assembly: AssemblyDescription("Base xrm features for MS Dynamics CRM 2015")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("KpdApps.MsCrm.Xrm.Common")]
-[assembly: AssemblyCopyright("Copyright ©  2018")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCompany("KpdApps Ltd.")]
+[assembly: AssemblyProduct("KpdApps MsCrm Xrm")]
+[assembly: AssemblyCopyright("Dmitry [KP0H] Pelevin © 2018")]
+[assembly: AssemblyTrademark("Dmitry [KP0H] Pelevin")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible

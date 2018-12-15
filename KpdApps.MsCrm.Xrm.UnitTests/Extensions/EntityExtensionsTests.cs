@@ -154,6 +154,10 @@ namespace KpdApps.MsCrm.Xrm.UnitTests.Extensions
             Assert.IsFalse(originEnt.ContainsNotNull(NullAttribute));
         }
 
-
+        [TestMethod]
+        public void TestBandages()
+        {
+            Assert.Fail("Test bandages");
+        }
     }
 }

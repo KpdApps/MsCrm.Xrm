@@ -18,8 +18,8 @@ namespace KpdApps.MsCrm.Xrm.Extensions
         {
             Entity activityParty = new Entity
             {
-                LogicalName = "activityparty",
-                Attributes = { ["partyid"] = reference }
+                LogicalName = Schema.ActivityParty.LogicalName,
+                Attributes = { [Schema.ActivityParty.PartyId] = reference }
             };
             EntityCollection activityCollection = new EntityCollection();
             activityCollection.Entities.Add(activityParty);

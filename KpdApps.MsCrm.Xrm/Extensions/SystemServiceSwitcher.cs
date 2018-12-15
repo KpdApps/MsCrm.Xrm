@@ -4,7 +4,6 @@ using Microsoft.Xrm.Sdk.Client;
 using Microsoft.Xrm.Sdk.Query;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace KpdApps.MsCrm.Xrm.Extensions
 {
@@ -27,13 +26,13 @@ namespace KpdApps.MsCrm.Xrm.Extensions
 
                 var query = new QueryExpression
                 {
-                    EntityName = "systemuser",
+                    EntityName = Schema.SystemUser.LogicalName,
                     NoLock = true,
                     Criteria =
                     {
                         Conditions =
                         {
-                            new ConditionExpression("fullname", ConditionOperator.Equal, "SYSTEM")
+                            new ConditionExpression(Schema.SystemUser.Fullname, ConditionOperator.Equal, "SYSTEM")
                         }
                     }
                 };

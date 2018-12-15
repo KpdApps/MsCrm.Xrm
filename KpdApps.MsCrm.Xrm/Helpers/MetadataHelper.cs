@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace KpdApps.MsCrm.Xrm.Helpers
 {
-    public static class CrmMetadataHelper
+    public static class MetadataHelper
     {
         private static List<EntityMetadata> _entities = new List<EntityMetadata>();
 

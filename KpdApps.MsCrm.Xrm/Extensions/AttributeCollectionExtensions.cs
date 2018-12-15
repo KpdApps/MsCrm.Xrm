@@ -62,12 +62,12 @@ namespace KpdApps.MsCrm.Xrm.Extensions
 
         public static int GetStatusValue(this AttributeCollection properties)
         {
-            return GetPicklistValue(properties, "statuscode");
+            return GetPicklistValue(properties, Schema.CommonFields.StatusCode);
         }
 
         public static int GetStateValue(this AttributeCollection properties)
         {
-            return GetPicklistValue(properties, "statecode");
+            return GetPicklistValue(properties, Schema.CommonFields.StateCode);
         }
 
         public static int GetPicklistValue(this AttributeCollection properties, string name)
@@ -94,7 +94,7 @@ namespace KpdApps.MsCrm.Xrm.Extensions
 
         public static void SetStatusValue(this AttributeCollection properties, int value)
         {
-            SetPicklistValue(properties, "statuscode", value);
+            SetPicklistValue(properties, Schema.CommonFields.StatusCode, value);
         }
 
         public static DateTime GetDateTimeValue(this AttributeCollection properties, string name)

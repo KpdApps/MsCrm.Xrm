@@ -237,5 +237,15 @@ namespace KpdApps.MsCrm.Xrm.Extensions
 
             return result;
         }
+
+        /// <summary>
+        ///     Create copy of Entity to make update request.
+        /// </summary>
+        /// <param name="entity">Original Entity.</param>
+        /// <returns>Entity instance to make update request.</returns>
+        public static Entity CloneForUpdate(this Entity entity)
+        {
+            return Clone(entity, entity.LogicalName + "id");
+        }
     }
 }

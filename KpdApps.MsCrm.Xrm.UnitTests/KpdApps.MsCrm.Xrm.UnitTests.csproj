@@ -118,7 +118,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Adapters\PluginActionTestAdapter.cs" />
     <Compile Include="Extensions\EntityExtensionsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

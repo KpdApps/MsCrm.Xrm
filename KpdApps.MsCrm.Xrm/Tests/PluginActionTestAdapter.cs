@@ -1,7 +1,7 @@
 ﻿using KpdApps.MsCrm.Xrm.Plugins;
 using System;
 
-namespace KpdApps.MsCrm.Xrm.UnitTests.Adapters
+namespace KpdApps.MsCrm.Xrm.Tests
 {
     public class PluginActionTestAdapter<T> : PluginBase
     {

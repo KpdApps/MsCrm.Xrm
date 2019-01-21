@@ -81,6 +81,7 @@
     <Compile Include="Schema\ActivityParty.cs" />
     <Compile Include="Schema\CommonFields.cs" />
     <Compile Include="Schema\SystemUser.cs" />
+    <Compile Include="Tests\PluginActionTestAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

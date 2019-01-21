@@ -152,15 +152,15 @@ namespace KpdApps.MsCrm.Xrm.Extensions
 
         public static void SetLookupValue(this AttributeCollection properties, string name, string type, Guid value)
         {
-            if (properties.Contains(name))
-                properties[name] = new EntityReference(type, value);
-            else
-                properties.Add(name, new EntityReference(type, value));
+            SetLookupValue(properties, name, new EntityReference(type, value));
         }
 
         public static void SetLookupValue(this AttributeCollection properties, string name, EntityReference reference)
         {
-            SetLookupValue(properties, name, reference.LogicalName, reference.Id);
+            if (properties.Contains(name))
+                properties[name] = reference;
+            else
+                properties.Add(name, reference);
         }
 
         public static int GetNumberValue(this AttributeCollection properties, string name)

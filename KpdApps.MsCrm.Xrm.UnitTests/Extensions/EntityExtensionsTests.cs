@@ -153,7 +153,5 @@ namespace KpdApps.MsCrm.Xrm.UnitTests.Extensions
 
             Assert.IsFalse(originEnt.ContainsNotNull(NullAttribute));
         }
-
-
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xrm.Sdk;
 using System;
+using System.Linq;
 
 namespace KpdApps.MsCrm.Xrm.Plugins
 {
@@ -13,21 +14,53 @@ namespace KpdApps.MsCrm.Xrm.Plugins
 
         public IOrganizationService AdminService => State.AdminService;
 
+        private PluginActionBehavior[] _behaviors;
+
         /// <summary>
         /// 
         /// </summary>
         public PluginActionBase(PluginState state)
         {
             State = state;
+            _behaviors = Attribute.GetCustomAttributes(GetType()).Select(s => (PluginActionBehavior)s).ToArray();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// /// <param name="state"></param>
-        public virtual void Execute()
+        private bool PreValidate()
         {
-            throw new NotImplementedException();
+            if (!_behaviors.Any())
+            {
+                return true;
+            }
+
+            IPluginExecutionContext context = (IPluginExecutionContext)State.Provider.GetService(typeof(IPluginExecutionContext));
+            foreach (PluginActionBehavior behavior in _behaviors)
+            {
+                if (string.Compare(behavior.MessageName, context.MessageName, true) != 0)
+                {
+                    continue;
+                }
+
+                foreach (var preImage in behavior.PreImages)
+                {
+                    if (!context.PreEntityImages.ContainsKey(preImage))
+                        throw new Exception($"Pre-Image '{preImage}' not registered for plug-in");
+                }
+            }
+
+            return false;
         }
+
+        public virtual bool TryExecute()
+        {
+            if (PreValidate())
+            {
+                Execute();
+                return true;
+            }
+
+            return false;
+        }
+
+        public abstract void Execute();
     }
 }

@@ -15,7 +15,7 @@ namespace KpdApps.MsCrm.Xrm.Extensions
 
         private static readonly Dictionary<Guid, Guid> OrgSystemUserIds = new Dictionary<Guid, Guid>();
 
-        protected Guid SystemUser
+        private Guid SystemUser
         {
             get
             {

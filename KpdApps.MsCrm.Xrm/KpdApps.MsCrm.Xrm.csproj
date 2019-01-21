@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Plugins\PluginActionBase.cs" />
+    <Compile Include="Plugins\PluginActionBehavior.cs" />
     <Compile Include="Plugins\PluginBase.cs" />
     <Compile Include="Extensions\AttributeCollectionExtensions.cs" />
     <Compile Include="Extensions\EntityExtensions.cs" />

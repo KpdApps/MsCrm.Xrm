@@ -25,7 +25,7 @@ namespace KpdApps.MsCrm.Xrm.Plugins
             _behaviors = Attribute.GetCustomAttributes(GetType()).Select(s => (PluginActionBehavior)s).ToArray();
         }
 
-        private bool PreValidate()
+        protected bool PreValidate()
         {
             if (!_behaviors.Any())
             {
@@ -44,6 +44,31 @@ namespace KpdApps.MsCrm.Xrm.Plugins
                 {
                     if (!context.PreEntityImages.ContainsKey(preImage))
                         throw new Exception($"Pre-Image '{preImage}' not registered for plug-in");
+                }
+
+                foreach (var postImage in behavior.PostImages)
+                {
+                    if (!context.PostEntityImages.ContainsKey(postImage))
+                        throw new Exception($"Post-Image '{postImage}' not registered for plug-in");
+                }
+
+                if (!string.IsNullOrEmpty(behavior.EntityName))
+                {
+                    if ((behavior.TargetType == PluginTargetType.Relationship)
+                        && (string.Compare(((Relationship)context.InputParameters["Relationship"]).SchemaName, behavior.EntityName, true) == 0))
+                        return true;
+
+                    if ((behavior.TargetType == PluginTargetType.TargetEntity)
+                        && (string.Compare(((Entity)context.InputParameters["Target"]).LogicalName, behavior.EntityName, true) == 0))
+                        return true;
+
+                    if ((behavior.TargetType == PluginTargetType.EntityMoniker)
+                        && (string.Compare(((EntityReference)context.InputParameters["EntityMoniker"]).LogicalName, behavior.EntityName, true) == 0))
+                        return true;
+
+                    if ((behavior.TargetType == PluginTargetType.TargetEntityReference)
+                        && (string.Compare(((EntityReference)context.InputParameters["Target"]).LogicalName, behavior.EntityName, true) == 0))
+                        return true;
                 }
             }
 

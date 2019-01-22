@@ -12,10 +12,19 @@ namespace KpdApps.MsCrm.Xrm.Plugins
         public string MessageName { get; private set; }
         public string[] PreImages { get; private set; }
         public string[] PostImages { get; private set; }
-        public Dictionary<string, Type> InputParameters { get; private set; }
+
+        public PluginActionBehavior(PluginTargetType targetType, string messageName, string entityName = null, string targetEntityReferenceName = null, string preImage = null, string postImage = null)
+        {
+            TargetType = targetType;
+            MessageName = messageName;
+            EntityName = entityName;
+            TargetEntityReferenceName = targetEntityReferenceName;
+            PreImages = new[] { preImage };
+            PostImages = new[] { postImage };
+        }
 
         public PluginActionBehavior(PluginTargetType targetType, string messageName, string entityName = null, string targetEntityReferenceName = null,
-                                        string[] preImages = null, string[] postImages = null, Dictionary<string, Type> inputParameters = null)
+                                        string[] preImages = null, string[] postImages = null)
         {
             TargetType = targetType;
             MessageName = messageName;
@@ -23,7 +32,6 @@ namespace KpdApps.MsCrm.Xrm.Plugins
             TargetEntityReferenceName = targetEntityReferenceName;
             PreImages = preImages;
             PostImages = postImages;
-            InputParameters = inputParameters;
         }
     }
 }

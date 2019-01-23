@@ -119,6 +119,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\EntityExtensionsTests.cs" />
+    <Compile Include="Plugins\Behaviors\PluginActionOnCreateBehavior.cs" />
+    <Compile Include="Plugins\Behaviors\PluginActionOnUpdateBehavior.cs" />
+    <Compile Include="Plugins\PluginActionBehaviorsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

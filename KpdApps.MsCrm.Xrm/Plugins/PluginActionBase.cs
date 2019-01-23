@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xrm.Sdk;
 using System;
 using System.Linq;
+using System.Text;
 
 namespace KpdApps.MsCrm.Xrm.Plugins
 {
@@ -16,6 +17,12 @@ namespace KpdApps.MsCrm.Xrm.Plugins
 
         private PluginActionBehavior[] _behaviors;
 
+        public string ErrorMessage => _errorMessageBuilder.ToString();
+        private StringBuilder _errorMessageBuilder = new StringBuilder();
+
+        public string TraceMessage => _traceMessageBuilder.ToString();
+        private StringBuilder _traceMessageBuilder = new StringBuilder();
+
         /// <summary>
         /// 
         /// </summary>
@@ -27,7 +34,7 @@ namespace KpdApps.MsCrm.Xrm.Plugins
 
         protected bool PreValidate()
         {
-            if (!_behaviors.Any())
+            if (_behaviors.Length == 0)
             {
                 return true;
             }
@@ -40,16 +47,26 @@ namespace KpdApps.MsCrm.Xrm.Plugins
                     continue;
                 }
 
-                foreach (var preImage in behavior.PreImages)
+                if (behavior.PreImages != null)
                 {
-                    if (!context.PreEntityImages.ContainsKey(preImage))
-                        throw new Exception($"Pre-Image '{preImage}' not registered for plug-in");
+                    foreach (var preImage in behavior.PreImages)
+                    {
+                        if (!context.PreEntityImages.ContainsKey(preImage))
+                        {
+                            TraceActionError($"Pre-Image '{preImage}' not registered for plug-in");
+                        }
+                    }
                 }
 
-                foreach (var postImage in behavior.PostImages)
+                if (behavior.PostImages != null)
                 {
-                    if (!context.PostEntityImages.ContainsKey(postImage))
-                        throw new Exception($"Post-Image '{postImage}' not registered for plug-in");
+                    foreach (var postImage in behavior.PostImages)
+                    {
+                        if (!context.PostEntityImages.ContainsKey(postImage))
+                        {
+                            TraceActionError($"Post-Image '{postImage}' not registered for plug-in");
+                        }
+                    }
                 }
 
                 if (!string.IsNullOrEmpty(behavior.EntityName))
@@ -72,6 +89,23 @@ namespace KpdApps.MsCrm.Xrm.Plugins
                 }
             }
 
+            TraceActionError($"No behavior found for the specified target:");
+            //RelationShip
+            if (context.InputParameters.ContainsKey("Relationship"))
+            {
+                TraceActionError($"Relationship: {((Relationship)context.InputParameters["Relationship"]).SchemaName}");
+            }
+            //Target
+            else if (context.InputParameters.ContainsKey("Target"))
+            {
+                TraceActionError($"Target: {((Entity)context.InputParameters["Target"]).LogicalName}");
+            }
+            //EntityMoniker
+            else if (context.InputParameters.ContainsKey("EntityMoniker"))
+            {
+                TraceActionError($"EntityMoniker: {((Relationship)context.InputParameters["Relationship"]).SchemaName}");
+            }
+
             return false;
         }
 
@@ -87,5 +121,16 @@ namespace KpdApps.MsCrm.Xrm.Plugins
         }
 
         public abstract void Execute();
+
+        protected void TraceActionError(string message)
+        {
+            _traceMessageBuilder.AppendLine($"{DateTime.Now.ToString("yyyy.MM.dd HH:mm:ss")} : {message}");
+            _errorMessageBuilder.AppendLine($"{DateTime.Now.ToString("yyyy.MM.dd HH:mm:ss")} : {message}");
+        }
+
+        protected void TraceAction(string message)
+        {
+            _traceMessageBuilder.AppendLine($"{DateTime.Now.ToString("yyyy.MM.dd HH:mm:ss")} : {message}");
+        }
     }
 }

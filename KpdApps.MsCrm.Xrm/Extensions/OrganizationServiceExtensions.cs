@@ -105,6 +105,25 @@ namespace KpdApps.MsCrm.Xrm.Extensions
             return Retrieve(organizationService, entityRef.LogicalName, entityRef.Id, attrs);
         }
 
+        /// <summary>
+        /// Assign user to entity (as owner).
+        /// </summary>
+        /// <param name="organizationService"><see cref="IOrganizationService"/>.</param>
+        /// <param name="assignee">EntityReference to SystemUser.</param>
+        /// <param name="target">EntityReference to Target Entity.</param>
+        /// <returns></returns>
+        [Obsolete("Depricated by vendor.")]
+        public static AssignResponse Assign(this IOrganizationService organizationService, EntityReference assignee, EntityReference target)
+        {
+            AssignRequest request = new AssignRequest
+            {
+                Assignee = assignee,
+                Target = target
+            };
+
+            return (AssignResponse)organizationService.Execute(request);
+        }
+
         public static SystemServiceSwitcher SwitchToSystem(this IOrganizationService service)
         {
             return new SystemServiceSwitcher(service);
